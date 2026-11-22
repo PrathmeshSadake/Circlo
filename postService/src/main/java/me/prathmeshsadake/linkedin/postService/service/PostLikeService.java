@@ -3,6 +3,7 @@ package me.prathmeshsadake.linkedin.postService.service;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import me.prathmeshsadake.linkedin.postService.auth.AuthContextHolder;
 import me.prathmeshsadake.linkedin.postService.entity.Post;
 import me.prathmeshsadake.linkedin.postService.entity.PostLike;
 import me.prathmeshsadake.linkedin.postService.exception.BadRequestException;
@@ -21,7 +22,7 @@ public class PostLikeService {
 
     @Transactional
     public void likePost(Long postId) {
-        Long userId = 2L;
+        Long userId = currentUserId();
         log.info("Liking post like id {}", postId);
         Post post = postRepository.findById(postId).orElseThrow(()-> new ResourceNotFoundException("Post not found"));
 
@@ -39,7 +40,7 @@ public class PostLikeService {
 
     @Transactional
     public void unlikePost(Long postId){
-        Long userId = 2L;
+        Long userId = currentUserId();
         log.info("Liking post like id {}", postId);
         Post post = postRepository.findById(postId).orElseThrow(()-> new ResourceNotFoundException("Post not found"));
 
@@ -49,8 +50,14 @@ public class PostLikeService {
         }
 
         postLikeRepository.deleteByUserIdAndPostId(userId, postId);
+    }
 
-
+    private Long currentUserId() {
+        Long userId = AuthContextHolder.getCurrentUserId();
+        if (userId == null) {
+            throw new BadRequestException("Missing authenticated user");
+        }
+        return userId;
     }
 
 }

@@ -16,7 +16,7 @@
 		<module>userService</module>
 		<module>postService</module>
 		<module>connectionService</module>
-		<module>APIGateway</module>
+		<module>apiGateway</module>
 		<module>discoverServer</module>
 	</modules>
 </project>

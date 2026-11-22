@@ -5,22 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="11b68fc5-c824-4555-b648-fec64c27756d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/connectionService/src/main/java/me/prathmeshsadake/linkedin/connectionService/controller/ConnectionsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/connectionService/src/main/java/me/prathmeshsadake/linkedin/connectionService/entity/Person.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/connectionService/src/main/java/me/prathmeshsadake/linkedin/connectionService/repository/PersonRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/connectionService/src/main/java/me/prathmeshsadake/linkedin/connectionService/service/ConnectionsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/APIGateway/src/main/java/me/prathmeshsadake/linkedin/APIGateway/service/JwtService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/postService/src/main/java/me/prathmeshsadake/linkedin/postService/auth/AuthContextHolder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/postService/src/main/java/me/prathmeshsadake/linkedin/postService/auth/FeignClientInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/postService/src/main/java/me/prathmeshsadake/linkedin/postService/auth/RequestInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/postService/src/main/java/me/prathmeshsadake/linkedin/postService/auth/WebMvcConfigure.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/postService/src/main/java/me/prathmeshsadake/linkedin/postService/client/ConnectionsServiceClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/postService/src/main/java/me/prathmeshsadake/linkedin/postService/dto/PersonDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APIGateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/APIGateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/APIGateway/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/connectionService/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/connectionService/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/connectionService/src/main/java/me/prathmeshsadake/linkedin/connectionService/ConnectionServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/connectionService/src/main/java/me/prathmeshsadake/linkedin/connectionService/ConnectionServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/connectionService/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/connectionService/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/postService/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/postService/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/postService/src/main/java/me/prathmeshsadake/linkedin/postService/PostServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/postService/src/main/java/me/prathmeshsadake/linkedin/postService/PostServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/postService/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/postService/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userService/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/userService/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userService/src/main/java/me/prathmeshsadake/linkedin/userService/UserServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/userService/src/main/java/me/prathmeshsadake/linkedin/userService/UserServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userService/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/userService/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/postService/src/main/java/me/prathmeshsadake/linkedin/postService/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/postService/src/main/java/me/prathmeshsadake/linkedin/postService/controller/PostController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/userService/src/main/java/me/prathmeshsadake/linkedin/userService/service/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/userService/src/main/java/me/prathmeshsadake/linkedin/userService/service/JwtService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,13 +91,16 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.annotationProcessors"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/userService/src/main/java/me/prathmeshsadake/linkedin/userService/exception" />
       <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="me.prathmeshsadake.linkedin.APIGateway.service" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -134,6 +137,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="APIGateway" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="APIGateway" />
+      <option name="filePath" />
+      <method v="2" />
+    </configuration>
     <configuration name="distributed-linkedIn" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
       <MavenSettings>
         <option name="myGeneralSettings" />
@@ -160,6 +174,30 @@
           </MavenRunnerParameters>
         </option>
       </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="APIGateway" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
     <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
@@ -232,6 +270,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <module name="APIGateway" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <option name="RUN_TOOL" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.UserServiceApplication" />
@@ -273,5 +325,9 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

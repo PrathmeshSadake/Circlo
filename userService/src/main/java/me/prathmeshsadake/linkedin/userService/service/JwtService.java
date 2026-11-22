@@ -31,14 +31,14 @@ public class JwtService {
                 .compact();
     }
 
-    public Long getUserIdFromToken(String token){
+    public String getUserIdFromToken(String token){
         Claims claims = Jwts.parser()
         .verifyWith(getJwtSecretKey())
         .build()
         .parseSignedClaims(token)
         .getPayload();
 
-        return Long.valueOf(claims.getSubject());
+        return claims.getSubject();
     }
 
 }

@@ -1,6 +1,7 @@
 package me.prathmeshsadake.linkedin.postService.controller;
 
 import lombok.RequiredArgsConstructor;
+import me.prathmeshsadake.linkedin.postService.dto.PersonDto;
 import me.prathmeshsadake.linkedin.postService.dto.PostCreateRequestDto;
 import me.prathmeshsadake.linkedin.postService.dto.PostDto;
 import me.prathmeshsadake.linkedin.postService.service.PostService;
@@ -20,13 +21,18 @@ public class PostController {
     // Create a new Post
     @PostMapping
     public ResponseEntity<PostDto> createPost(@RequestBody PostCreateRequestDto postCreateRequestDto) {
-        PostDto postDto = postService.createPost(postCreateRequestDto, 1L);
+        PostDto postDto = postService.createPost(postCreateRequestDto);
         return new ResponseEntity<>(postDto, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/network/first-degree")
+    public ResponseEntity<List<PersonDto>> getMyFirstDegreeConnections() {
+        return ResponseEntity.ok(postService.getMyFirstDegreeConnections());
     }
 
     // Get all posts
     @GetMapping("/{postId}")
-    public ResponseEntity<PostDto> getPost(@PathVariable Long postId) {
+    public ResponseEntity<PostDto> getPost(@PathVariable Long postId, @RequestHeader("X-User-Id") Long userId) {
         PostDto postDto = postService.getPostById(postId);
         return ResponseEntity.ok(postDto);
     }
