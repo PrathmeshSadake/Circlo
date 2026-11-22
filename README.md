@@ -73,26 +73,3 @@ mvn -pl services/post-service -am jib:dockerBuild
 ```
 
 The image is tagged `linkedin/<artifactId>:local`.
-
-## GitHub
-
-Suggested description:
-
-```
-Circlo is a local professional network: accounts, posts, likes, connection requests, notices, and image upload behind one API gateway.
-```
-
-Suggested topics:
-
-```
-spring-boot
-spring-cloud
-kafka
-neo4j
-postgresql
-react
-typescript
-docker-compose
-eureka
-s3
-```
