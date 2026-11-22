@@ -1,4 +1,4 @@
-# What changed, and how to read it
+# Circlo: what changed, and how to read it
 
 This file is the map of the current system. It covers the folder move, the local infrastructure, Kafka, connection requests, image upload, Feign, and Docker.
 

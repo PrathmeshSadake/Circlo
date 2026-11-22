@@ -5,12 +5,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>me.prathmeshsadake.linkedin</groupId>
-	<artifactId>distributed-linkedin</artifactId>
+	<artifactId>circlo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>distributed-linkedin</name>
-	<description>Distributed LinkedIn microservices</description>
+	<name>circlo</name>
+	<description>Circlo, a local professional network</description>
 
 	<modules>
 		<module>services/discovery-server</module>

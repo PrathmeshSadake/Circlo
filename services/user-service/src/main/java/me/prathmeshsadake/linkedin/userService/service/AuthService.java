@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.prathmeshsadake.linkedin.userService.auth.AuthContextHolder;
 import me.prathmeshsadake.linkedin.userService.config.KafkaConfig;
+import me.prathmeshsadake.linkedin.userService.dto.ForgotPasswordRequest;
 import me.prathmeshsadake.linkedin.userService.dto.LoginRequestDto;
 import me.prathmeshsadake.linkedin.userService.dto.SignupRequestDto;
 import me.prathmeshsadake.linkedin.userService.dto.UserDto;
@@ -87,5 +88,31 @@ public class AuthService {
             throw new BadRequestException("Invalid credentials");
         }
         return jwtService.generateToken(user);
+    }
+
+    public void resetPassword(ForgotPasswordRequest request) {
+        if (request.getNewPassword() == null || request.getNewPassword().length() < 6) {
+            throw new BadRequestException("Password must be at least 6 characters");
+        }
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new ResourceNotFoundException("No account uses that email"));
+        user.setPassword(BCrypt.hash(request.getNewPassword()));
+        userRepository.save(user);
+    }
+
+    public UserDto currentUser() {
+        Long userId = AuthContextHolder.getCurrentUserId();
+        if (userId == null) {
+            throw new BadRequestException("Missing authenticated user");
+        }
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        return modelMapper.map(user, UserDto.class);
+    }
+
+    public java.util.List<UserDto> listPeople() {
+        return userRepository.findAll().stream()
+                .map(user -> modelMapper.map(user, UserDto.class))
+                .toList();
     }
 }

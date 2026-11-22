@@ -70,6 +70,12 @@ public class PostService {
         return userId;
     }
 
+    public List<PostDto> feed() {
+        return postRepository.findAllByOrderByCreatedAtDesc().stream()
+                .map(post -> modelMapper.map(post, PostDto.class))
+                .collect(Collectors.toList());
+    }
+
     public PostDto getPostById(Long postId) {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new ResourceNotFoundException("Post not found with ID " + postId));

@@ -25,6 +25,11 @@ public class PostController {
         return new ResponseEntity<>(postDto, HttpStatus.CREATED);
     }
 
+    @GetMapping("/feed")
+    public ResponseEntity<List<PostDto>> feed() {
+        return ResponseEntity.ok(postService.feed());
+    }
+
     @GetMapping("/network/first-degree")
     public ResponseEntity<List<PersonDto>> getMyFirstDegreeConnections() {
         return ResponseEntity.ok(postService.getMyFirstDegreeConnections());

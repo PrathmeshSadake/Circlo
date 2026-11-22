@@ -1,6 +1,7 @@
 package me.prathmeshsadake.linkedin.userService.controller;
 
 import lombok.RequiredArgsConstructor;
+import me.prathmeshsadake.linkedin.userService.dto.ForgotPasswordRequest;
 import me.prathmeshsadake.linkedin.userService.dto.LoginRequestDto;
 import me.prathmeshsadake.linkedin.userService.dto.SignupRequestDto;
 import me.prathmeshsadake.linkedin.userService.dto.UserDto;
@@ -27,9 +28,15 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> signup(@RequestBody LoginRequestDto loginRequestDto){
+    public ResponseEntity<String> login(@RequestBody LoginRequestDto loginRequestDto){
         String token = authService.login(loginRequestDto);
         return ResponseEntity.ok(token);
+    }
+
+    @PostMapping("/forgot-password")
+    public ResponseEntity<Void> forgotPassword(@RequestBody ForgotPasswordRequest request) {
+        authService.resetPassword(request);
+        return ResponseEntity.ok().build();
     }
 
 }

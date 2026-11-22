@@ -5,6 +5,7 @@ import me.prathmeshsadake.linkedin.userService.dto.ProfileImageRequest;
 import me.prathmeshsadake.linkedin.userService.dto.UserDto;
 import me.prathmeshsadake.linkedin.userService.service.AuthService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProfileController {
 
     private final AuthService authService;
+
+    @GetMapping("/profile/me")
+    public ResponseEntity<UserDto> me() {
+        return ResponseEntity.ok(authService.currentUser());
+    }
+
+    @GetMapping("/people")
+    public ResponseEntity<java.util.List<UserDto>> people() {
+        return ResponseEntity.ok(authService.listPeople());
+    }
 
     @PutMapping("/profile/image")
     public ResponseEntity<UserDto> updateMyProfileImage(@RequestBody ProfileImageRequest request) {
