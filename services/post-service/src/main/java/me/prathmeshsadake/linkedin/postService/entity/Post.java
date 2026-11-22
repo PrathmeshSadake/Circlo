@@ -21,6 +21,8 @@ public class Post {
 
     private String content;
 
+    private String mediaUrl;
+
     private Long userId;
 
     @CreationTimestamp

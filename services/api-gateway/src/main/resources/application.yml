@@ -8,12 +8,20 @@ spring:
       server:
         webflux:
           routes:
+            - id: user-auth
+              uri: lb://USER-SERVICE
+              predicates:
+                - Path=/api/v1/users/auth/**
+              filters:
+                - StripPrefix=2
+
             - id: user-service
               uri: lb://USER-SERVICE
               predicates:
                 - Path=/api/v1/users/**
               filters:
                 - StripPrefix=2
+                - name: AuthenticationFilter
 
             - id: connection-service
               uri: lb://CONNECTION-SERVICE
@@ -31,12 +39,28 @@ spring:
                 - StripPrefix=2
                 - name: AuthenticationFilter
 
+            - id: notification-service
+              uri: lb://NOTIFICATION-SERVICE
+              predicates:
+                - Path=/api/v1/notifications/**
+              filters:
+                - StripPrefix=2
+                - name: AuthenticationFilter
+
+            - id: uploader-service
+              uri: lb://UPLOADER-SERVICE
+              predicates:
+                - Path=/api/v1/uploads/**
+              filters:
+                - StripPrefix=2
+                - name: AuthenticationFilter
+
 server:
   port: 8080
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
-
-
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://localhost:8761/eureka}
+  instance:
+    prefer-ip-address: true

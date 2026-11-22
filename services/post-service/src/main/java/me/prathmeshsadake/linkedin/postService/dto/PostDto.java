@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 public class PostDto {
     private Long id;
     private String content;
+    private String mediaUrl;
     private Long userId;
     private LocalDateTime createdAt;
 }

@@ -5,18 +5,20 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>me.prathmeshsadake.linkedin</groupId>
-	<artifactId>distributed-linkedIn</artifactId>
+	<artifactId>distributed-linkedin</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>distributed-linkedIn</name>
+	<name>distributed-linkedin</name>
 	<description>Distributed LinkedIn microservices</description>
 
 	<modules>
-		<module>userService</module>
-		<module>postService</module>
-		<module>connectionService</module>
-		<module>apiGateway</module>
-		<module>discoverServer</module>
+		<module>services/discovery-server</module>
+		<module>services/api-gateway</module>
+		<module>services/user-service</module>
+		<module>services/post-service</module>
+		<module>services/connection-service</module>
+		<module>services/notification-service</module>
+		<module>services/uploader-service</module>
 	</modules>
 </project>

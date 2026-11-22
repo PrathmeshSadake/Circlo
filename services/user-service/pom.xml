@@ -101,6 +101,11 @@
 			<version>0.4</version>
 			<scope>compile</scope>
 		</dependency>
+	
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-kafka</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -156,6 +161,20 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+		
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>3.4.5</version>
+				<configuration>
+					<from>
+						<image>eclipse-temurin:21-jre</image>
+					</from>
+					<to>
+						<image>linkedin/user-service:local</image>
+					</to>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

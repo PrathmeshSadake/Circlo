@@ -4,14 +4,17 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.prathmeshsadake.linkedin.postService.auth.AuthContextHolder;
 import me.prathmeshsadake.linkedin.postService.client.ConnectionsServiceClient;
+import me.prathmeshsadake.linkedin.postService.config.KafkaConfig;
 import me.prathmeshsadake.linkedin.postService.dto.PersonDto;
 import me.prathmeshsadake.linkedin.postService.dto.PostCreateRequestDto;
 import me.prathmeshsadake.linkedin.postService.dto.PostDto;
 import me.prathmeshsadake.linkedin.postService.entity.Post;
+import me.prathmeshsadake.linkedin.postService.events.PostCreatedEvent;
 import me.prathmeshsadake.linkedin.postService.exception.BadRequestException;
 import me.prathmeshsadake.linkedin.postService.exception.ResourceNotFoundException;
 import me.prathmeshsadake.linkedin.postService.repository.PostRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,6 +27,7 @@ public class PostService {
     private final PostRepository postRepository;
     private final ModelMapper modelMapper;
     private final ConnectionsServiceClient connectionsServiceClient;
+    private final KafkaTemplate<String, PostCreatedEvent> postCreatedKafkaTemplate;
 
     public PostDto createPost(PostCreateRequestDto postCreateRequestDto) {
         Long userId = currentUserId();
@@ -31,7 +35,25 @@ public class PostService {
         Post post = modelMapper.map(postCreateRequestDto, Post.class);
         post.setUserId(userId);
         post = postRepository.save(post);
+        notifyFirstDegreeConnections(post, userId);
         return modelMapper.map(post, PostDto.class);
+    }
+
+    private void notifyFirstDegreeConnections(Post post, Long authorId) {
+        for (PersonDto connection : connectionsServiceClient.getFirstDegreeConnections(authorId)) {
+            if (connection.getUserId() == null || connection.getUserId().equals(authorId)) {
+                continue;
+            }
+            PostCreatedEvent event = PostCreatedEvent.builder()
+                    .postId(post.getId())
+                    .authorId(authorId)
+                    .recipientUserId(connection.getUserId())
+                    .content(post.getContent())
+                    .mediaUrl(post.getMediaUrl())
+                    .build();
+            postCreatedKafkaTemplate.send(KafkaConfig.POST_CREATED_TOPIC, connection.getUserId().toString(), event);
+            log.info("Published post-created for recipient {}", connection.getUserId());
+        }
     }
 
     public List<PersonDto> getMyFirstDegreeConnections() {

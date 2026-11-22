@@ -19,8 +19,34 @@ public interface PersonRepository extends Neo4jRepository<Person, Long> {
     List<Person> getFirstDegreeConnections(Long userId);
 
     @Query("""
-            MATCH (personA:Person {userId: $userId}), (personB:Person {userId: $otherUserId})
-            MERGE (personA)-[:CONNECTED_TO]-(personB)
+            MATCH (a:Person {userId: $fromId})-[:CONNECTED_TO]-(b:Person {userId: $toId})
+            RETURN count(a)
             """)
-    void connect(@Param("userId") Long userId, @Param("otherUserId") Long otherUserId);
+    long countConnections(@Param("fromId") Long fromId, @Param("toId") Long toId);
+
+    @Query("""
+            MATCH (a:Person {userId: $fromId})-[r:CONNECTION_REQUEST]->(b:Person {userId: $toId})
+            RETURN count(r)
+            """)
+    long countRequests(@Param("fromId") Long fromId, @Param("toId") Long toId);
+
+    @Query("""
+            MATCH (a:Person {userId: $fromId}), (b:Person {userId: $toId})
+            MERGE (a)-[:CONNECTION_REQUEST]->(b)
+            """)
+    void createRequest(@Param("fromId") Long fromId, @Param("toId") Long toId);
+
+    @Query("""
+            MATCH (a:Person {userId: $fromId})-[r:CONNECTION_REQUEST]->(b:Person {userId: $toId})
+            DELETE r
+            """)
+    void deleteRequest(@Param("fromId") Long fromId, @Param("toId") Long toId);
+
+    @Query("""
+            MATCH (a:Person {userId: $fromId})-[r:CONNECTION_REQUEST]->(b:Person {userId: $toId})
+            DELETE r
+            WITH a, b
+            MERGE (a)-[:CONNECTED_TO]-(b)
+            """)
+    void acceptRequest(@Param("fromId") Long fromId, @Param("toId") Long toId);
 }

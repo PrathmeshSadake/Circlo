@@ -4,12 +4,15 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.prathmeshsadake.linkedin.postService.auth.AuthContextHolder;
+import me.prathmeshsadake.linkedin.postService.config.KafkaConfig;
 import me.prathmeshsadake.linkedin.postService.entity.Post;
 import me.prathmeshsadake.linkedin.postService.entity.PostLike;
+import me.prathmeshsadake.linkedin.postService.events.PostLikedEvent;
 import me.prathmeshsadake.linkedin.postService.exception.BadRequestException;
 import me.prathmeshsadake.linkedin.postService.exception.ResourceNotFoundException;
 import me.prathmeshsadake.linkedin.postService.repository.PostLikeRepository;
 import me.prathmeshsadake.linkedin.postService.repository.PostRepository;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,6 +22,7 @@ public class PostLikeService {
 
     private final PostLikeRepository postLikeRepository;
     private final PostRepository postRepository;
+    private final KafkaTemplate<String, PostLikedEvent> postLikedKafkaTemplate;
 
     @Transactional
     public void likePost(Long postId) {
@@ -34,8 +38,13 @@ public class PostLikeService {
         postLike.setUserId(userId);
         postLike.setPostId(postId);
         postLikeRepository.save(postLike);
-        // TODO: sends notification to owner of the post
-
+        PostLikedEvent event = PostLikedEvent.builder()
+                .postId(post.getId())
+                .likedByUserId(userId)
+                .postOwnerId(post.getUserId())
+                .build();
+        postLikedKafkaTemplate.send(KafkaConfig.POST_LIKED_TOPIC, post.getUserId().toString(), event);
+        log.info("Published post-liked for owner {}", post.getUserId());
     }
 
     @Transactional
